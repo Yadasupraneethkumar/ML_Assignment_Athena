@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Numeral System Converter</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .box { padding: 15px; border: 1px solid #ccc; margin-bottom: 20px; }
+        input, select { padding: 8px; width: 200px; margin: 5px; }
+        button { padding: 8px 15px; }
+    </style>
+</head>
+<body>
+
+<h2>🌍 Cultural Numeral System Converter</h2>
+
+<div class="box">
+    <h3>Convert</h3>
+    <input id="value" placeholder="Enter value">
+    <br>
+    <select id="src">
+        <option>arabic</option>
+        <option>roman</option>
+        <option>chinese</option>
+        <option>babylonian</option>
+        <option>mayan</option>
+        <option>yoruba</option>
+        <option>inuktitut</option>
+    </select>
+    →
+    <select id="dst">
+        <option>roman</option>
+        <option>arabic</option>
+        <option>chinese</option>
+        <option>babylonian</option>
+        <option>mayan</option>
+        <option>yoruba</option>
+        <option>inuktitut</option>
+    </select>
+    <br>
+    <button onclick="convert()">Convert</button>
+    <p id="convert_result"></p>
+</div>
+
+<div class="box">
+    <h3>Explain</h3>
+    <input id="ex_value" placeholder="Value">
+    <br>
+    <select id="ex_src">
+        <option>arabic</option>
+        <option>roman</option>
+        <option>chinese</option>
+        <option>babylonian</option>
+        <option>mayan</option>
+        <option>yoruba</option>
+        <option>inuktitut</option>
+    </select>
+    →
+    <select id="ex_dst">
+        <option>roman</option>
+        <option>arabic</option>
+        <option>chinese</option>
+        <option>babylonian</option>
+        <option>mayan</option>
+        <option>yoruba</option>
+        <option>inuktitut</option>
+    </select>
+    <br>
+    <button onclick="explain()">Explain</button>
+    <pre id="explain_result"></pre>
+</div>
+
+<div class="box">
+    <h3>Puzzle</h3>
+    <button onclick="getPuzzle()">New Puzzle</button>
+    <p id="puzzle_question"></p>
+    <input id="puzzle_answer" placeholder="Your answer">
+    <button onclick="checkPuzzle()">Check</button>
+    <p id="puzzle_result"></p>
+</div>
+
+<script>
+async function convert() {
+    const r = await fetch("http://127.0.0.1:8000/convert/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            src: src.value,
+            dst: dst.value,
+            value: value.value
+        })
+    });
+
+    const data = await r.json();
+    convert_result.textContent = "Result: " + JSON.stringify(data);
+}
+
+async function explain() {
+    const r = await fetch("http://127.0.0.1:8000/explain/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            src: ex_src.value,
+            dst: ex_dst.value,
+            value: ex_value.value
+        })
+    });
+
+    explain_result.textContent = JSON.stringify(await r.json(), null, 2);
+}
+
+let puzzle_id = null;
+
+async function getPuzzle() {
+    const r = await fetch("http://127.0.0.1:8000/puzzle/");
+    const data = await r.json();
+    puzzle_id = data.puzzle_id;
+    puzzle_question.textContent = data.question;
+}
+
+async function checkPuzzle() {
+    const r = await fetch("http://127.0.0.1:8000/puzzle/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            puzzle_id: puzzle_id,
+            answer: puzzle_answer.value
+        })
+    });
+
+    const data = await r.json();
+    puzzle_result.textContent = data.message;
+}
+</script>
+
+</body>
+</html>
