@@ -1,18 +1,29 @@
 from fastapi import FastAPI
-from .routes import convert, explain, puzzle
+from fastapi.middleware.cors import CORSMiddleware
+from api.routes import convert, explain, puzzle
 
-app = FastAPI(
-    title="Universal Numeral Systems API",
-    description="Convert, explain, and generate numeral system puzzles",
-    version="1.0",
+app = FastAPI(title="Numeral System API")
+
+# -----------------------------
+# Enable CORS for your frontend
+# -----------------------------
+origins = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Include routers with prefixes
-app.include_router(convert.router, prefix="/convert", tags=["Convert"])
-app.include_router(explain.router, prefix="/explain", tags=["Explain"])
-app.include_router(puzzle.router, prefix="/puzzle", tags=["Puzzle"])
-
+app.include_router(convert.router, prefix="/convert")
+app.include_router(explain.router, prefix="/explain")
+app.include_router(puzzle.router, prefix="/puzzle")
 
 @app.get("/")
-def root():
-    return {"message": "Universal Numeral Systems API is running!"}
+def home():
+    return {"message": "API running!"}

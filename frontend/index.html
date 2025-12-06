@@ -84,14 +84,14 @@ async function convert() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            src: src.value,
-            dst: dst.value,
+            src_system: src.value,
+            dst_system: dst.value,
             value: value.value
         })
     });
 
     const data = await r.json();
-    convert_result.textContent = "Result: " + JSON.stringify(data);
+    convert_result.textContent = "Result: " + data.result;
 }
 
 async function explain() {
@@ -99,13 +99,14 @@ async function explain() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            src: ex_src.value,
-            dst: ex_dst.value,
+            src_system: ex_src.value,
+            dst_system: ex_dst.value,
             value: ex_value.value
         })
     });
 
-    explain_result.textContent = JSON.stringify(await r.json(), null, 2);
+    const data = await r.json();
+    explain_result.textContent = data.steps.join("\n");
 }
 
 let puzzle_id = null;
@@ -123,7 +124,7 @@ async function checkPuzzle() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             puzzle_id: puzzle_id,
-            answer: puzzle_answer.value
+            user_answer: puzzle_answer.value
         })
     });
 
@@ -131,6 +132,7 @@ async function checkPuzzle() {
     puzzle_result.textContent = data.message;
 }
 </script>
+
 
 </body>
 </html>
