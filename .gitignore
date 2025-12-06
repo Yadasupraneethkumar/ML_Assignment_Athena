@@ -1,1 +1,5 @@
 athenaenv
+__pycache__/
+*pyc
+*.pyo
+.git

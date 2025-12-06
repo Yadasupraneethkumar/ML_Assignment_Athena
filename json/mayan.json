@@ -1,0 +1,27 @@
+{
+  "name": "Mayan Numerals",
+  "base_structure": "vigesimal (base-20) vertical positional",
+  "morphology": "Dots represent 1, bars represent 5, shells represent 0. Values stack vertically.",
+  "hierarchy": "Place values are 1, 20, 360 (18×20), 7200, ...",
+  "context": "Used by the ancient Maya in calendars, astronomy, and monumental inscriptions.",
+  "rules": [
+    "Mayan numerals use three symbols: dot (1), bar (5), shell (0).",
+    "Digits 0–19 combine dots and bars.",
+    "Numbers stack vertically: bottom = ones, above = 20s, then 360s.",
+    "Third position is 18×20 instead of 20×20.",
+    "Zero is shown using the shell symbol.",
+    "No subtractive notation exists."
+  ],
+  "symbols": {
+    "dot": 1,
+    "bar": 5,
+    "shell": 0
+  },
+  "interactive_examples": [
+    {
+      "arabic": 27,
+      "steps": ["27 = 20 + 7", "Top = 1 dot (20)", "Bottom = 7 (one bar + two dots)"],
+      "output": "[•] / [—••]"
+    }
+  ]
+}

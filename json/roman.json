@@ -1,0 +1,32 @@
+{
+  "name": "Roman Numerals",
+  "base_structure": "non-positional subtractive-additive system",
+  "morphology": "Roman numerals are formed by combining seven symbols (I, V, X, L, C, D, M) using additive and subtractive rules.",
+  "hierarchy": "Symbols increase in magnitude from I (1) to M (1000). Subtractive pairs form special values such as 4 (IV) and 9 (IX).",
+  "context": "Roman numerals originated in ancient Rome and were used throughout the Roman Empire in trade, architecture, and numbering.",
+  "rules": [
+    "Roman numerals use seven base symbols: I, V, X, L, C, D, M.",
+    "Symbols placed after a larger value are additive (VIII = 5 + 3).",
+    "Symbols placed before a larger value are subtractive (IV = 4, IX = 9).",
+    "Only powers of 10 (I, X, C) may be used subtractively, never V, L, or D.",
+    "A numeral may not repeat more than three times in succession (III = 3, but IIII is invalid).",
+    "V, L, and D are never repeated.",
+    "The subtractive forms are fixed: IV, IX, XL, XC, CD, CM.",
+    "Numbers are read left to right from largest to smallest groups."
+  ],
+  "symbols": {
+    "I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000
+  },
+  "interactive_examples": [
+    {
+      "arabic": 9,
+      "steps": ["Break into 10 - 1", "Use subtractive pattern IX"],
+      "output": "IX"
+    },
+    {
+      "arabic": 49,
+      "steps": ["Break into 40 + 9", "40 = XL", "9 = IX"],
+      "output": "XLIX"
+    }
+  ]
+}

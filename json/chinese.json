@@ -1,0 +1,28 @@
+{
+  "name": "Chinese Numerals",
+  "base_structure": "multiplicative-additive positional system",
+  "morphology": "Chinese numerals combine digits (一–九) with units (十, 百, 千, 萬, 億) through multiplicative compounding.",
+  "hierarchy": "Units progress as: 個(1), 十(10), 百(100), 千(1000), 萬(10,000), 億(100,000,000).",
+  "context": "Chinese numerals formed one of the earliest numeric systems and are used today in finance and official documents.",
+  "rules": [
+    "Chinese numerals combine digits (一 to 九) with units (十, 百, 千, 萬, 億).",
+    "If a unit appears alone, it implies one of that unit (十 = 10).",
+    "Numbers follow descending magnitude order.",
+    "零 marks internal gaps (105 = 一百零五).",
+    "Units never repeat (no 十十).",
+    "No subtractive notation exists; all values are additive."
+  ],
+  "symbols": {
+    "一": 1, "二": 2, "三": 3, "四": 4, "五": 5,
+    "六": 6, "七": 7, "八": 8, "九": 9,
+    "十": 10, "百": 100, "千": 1000,
+    "萬": 10000, "億": 100000000
+  },
+  "interactive_examples": [
+    {
+      "arabic": 234,
+      "steps": ["Break into 2×100 + 3×10 + 4", "二百 + 三十 + 四"],
+      "output": "二百三十四"
+    }
+  ]
+}

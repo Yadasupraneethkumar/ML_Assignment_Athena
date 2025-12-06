@@ -1,0 +1,27 @@
+{
+  "name": "Babylonian Numerals",
+  "base_structure": "base-60 positional",
+  "morphology": "Digits 1–59 are built using wedge symbols representing 1 and 10, combined additively.",
+  "hierarchy": "Place values follow powers of 60: 60^0, 60^1, 60^2, ...",
+  "context": "The Babylonian system is one of the oldest positional systems, used in Mesopotamia around 2000 BCE.",
+  "rules": [
+    "Babylonian uses base-60 positional notation.",
+    "Digits 1–59 combine vertical wedges (1) and corner wedges (10).",
+    "Each position represents a power of 60.",
+    "Originally no zero existed; later a placeholder wedge was added.",
+    "Digit order is left-to-right from highest power.",
+    "Numbers are purely additive."
+  ],
+  "symbols": {
+    "vertical_wedge": 1,
+    "corner_wedge": 10,
+    "placeholder": 0
+  },
+  "interactive_examples": [
+    {
+      "arabic": 125,
+      "steps": ["125 = 2×60 + 5", "Digit1 = 2 wedges", "Digit2 = 5 wedges"],
+      "output": "[2 wedges] [5 wedges]"
+    }
+  ]
+}

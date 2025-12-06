@@ -1,0 +1,31 @@
+{
+  "name": "Inuktitut Numerals",
+  "base_structure": "vigesimal (base-20) additive system",
+  "morphology": "Small numbers combine additive morphemes. 6–9 are (5 + X), teens are additive to 10, and twenties form a new unit.",
+  "hierarchy": "Units: 1–19, 20 (inuit), 400 (inuit × inuit).",
+  "context": "Inuktitut numerals reflect counting on fingers and toes, forming a natural vigesimal system.",
+  "rules": [
+    "Base-20 additive system.",
+    "1–5 have standalone words.",
+    "6–9 = 5 + X.",
+    "10–19 are constructed additively.",
+    "20 (inuit) acts as the next base unit.",
+    "21–39 = 20 + (1–19).",
+    "400 = 20 × 20 is a higher unit.",
+    "All constructions are additive; no subtractive forms exist."
+  ],
+  "symbols": {
+    "atausiq": 1,
+    "marruk": 2,
+    "pingasut": 3,
+    "sitamat": 4,
+    "tallimat": 5
+  },
+  "interactive_examples": [
+    {
+      "arabic": 26,
+      "steps": ["26 = 20 + 6", "6 = 5 + 1 = tallimat atausiq"],
+      "output": "inuit tallimat atausiq"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Yoruba Numerals",
+  "base_structure": "vigecimal (base-20) subtractive-additive spoken system",
+  "morphology": "Numbers are spoken using additive and subtractive expressions relative to multiples of 20.",
+  "hierarchy": "Key units: 1–9, 10–19 as (20 − X), ogún(20), ogójì(40), ogótà(60), ogọ́rin(80).",
+  "context": "The Yoruba numeric system is unique for its extensive use of subtraction in speech.",
+  "rules": [
+    "Base-20 with heavy use of subtraction.",
+    "Numbers 10–19 are spoken as 20 minus X.",
+    "15 = 20 - 5 (mẹ́ẹ̀dógún).",
+    "17 = 20 - 3 (mẹ́tàdínlógún).",
+    "Multiples of 20 have unique names.",
+    "39 = 40 - 1 (ọkànlélógójì).",
+    "No positional notation; everything is phrase-based."
+  ],
+  "symbols": {
+    "okan": 1, "eji": 2, "eta": 3, "erin": 4, "arun": 5,
+    "efa": 6, "eje": 7, "ejo": 8, "esan": 9
+  },
+  "interactive_examples": [
+    {
+      "arabic": 17,
+      "steps": ["17 = 20 - 3", "Yoruba expression = mẹ́tàdínlógún"],
+      "output": "mẹ́tàdínlógún"
+    }
+  ]
+}

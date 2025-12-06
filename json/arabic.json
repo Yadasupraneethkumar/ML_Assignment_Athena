@@ -1,0 +1,25 @@
+{
+  "name": "Arabic (Hindu–Arabic) Numerals",
+  "base_structure": "base-10 positional",
+  "morphology": "Digits (0–9) represent values multiplied by powers of ten according to position.",
+  "hierarchy": "Position determines magnitude: ones (10^0), tens (10^1), hundreds (10^2), and so on.",
+  "context": "The Hindu–Arabic numeral system originated in India and was later transmitted to the Islamic world and Europe. It is now the global standard.",
+  "rules": [
+    "Base-10 positional system where each digit represents a power of 10 depending on its position.",
+    "Digits range from 0 to 9 and have no internal additive or multiplicative roles.",
+    "Place determines value: 105 = 1×100 + 0×10 + 5.",
+    "Zero acts as a placeholder.",
+    "Numbers are read left to right from the highest position."
+  ],
+  "symbols": {
+    "0": 0, "1": 1, "2": 2, "3": 3, "4": 4,
+    "5": 5, "6": 6, "7": 7, "8": 8, "9": 9
+  },
+  "interactive_examples": [
+    {
+      "arabic": 507,
+      "steps": ["Break into 500 + 0 + 7", "Place value: 5 hundreds, 0 tens, 7 ones"],
+      "output": "507"
+    }
+  ]
+}
