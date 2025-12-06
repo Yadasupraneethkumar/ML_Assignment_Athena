@@ -5,29 +5,39 @@
     <style>
         body { font-family: Arial; padding: 20px; background: #f5f5f5; }
         .box {
+            padding: 20px;
             background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
         }
-        input, select { padding: 8px; width: 200px; margin: 5px; }
-        button { padding: 8px 15px; cursor: pointer; }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            width: 180px;
+        }
+        button {
+            padding: 10px 18px;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+        .result-box {
+            background: #eef;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            white-space: pre-line;
+        }
     </style>
 </head>
-
 <body>
 
 <h2>🌍 Cultural Numeral System Converter</h2>
 
-<!-- ========================= CONVERT BOX ========================= -->
 <div class="box">
     <h3>Convert</h3>
-
-    <input id="valueInput" placeholder="Enter number or numeral">
-
+    <input id="valueInput" placeholder="Enter number">
     <br>
-
     <select id="src">
         <option>arabic</option>
         <option>roman</option>
@@ -47,22 +57,15 @@
         <option>yoruba</option>
         <option>inuktitut</option>
     </select>
-
     <br>
-
     <button onclick="convert()">Convert</button>
-
-    <p id="convert_result"></p>
+    <div id="convert_result" class="result-box"></div>
 </div>
 
-<!-- ========================= EXPLAIN BOX ========================= -->
 <div class="box">
     <h3>Explain Conversion</h3>
-
     <input id="ex_value" placeholder="Enter value">
-
     <br>
-
     <select id="ex_src">
         <option>arabic</option>
         <option>roman</option>
@@ -82,86 +85,20 @@
         <option>yoruba</option>
         <option>inuktitut</option>
     </select>
-
     <br>
-
     <button onclick="explain()">Explain</button>
-
-    <pre id="explain_result"></pre>
+    <pre id="explain_result" class="result-box"></pre>
 </div>
 
-<!-- ========================= PUZZLE BOX ========================= -->
 <div class="box">
     <h3>Puzzle</h3>
-
     <button onclick="getPuzzle()">New Puzzle</button>
-
     <p id="puzzle_question"></p>
-
     <input id="puzzle_answer" placeholder="Your answer">
-
     <button onclick="checkPuzzle()">Check</button>
-
     <p id="puzzle_result"></p>
 </div>
 
-<script>
-async function convert() {
-    const r = await fetch("http://127.0.0.1:8000/convert/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            source: src.value,
-            target: dst.value,
-            value: valueInput.value
-        })
-    });
-
-    const data = await r.json();
-    document.getElementById("convert_result").textContent =
-        "Result: " + JSON.stringify(data);
-}
-
-async function explain() {
-    const r = await fetch("http://127.0.0.1:8000/explain/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            source: ex_src.value,
-            target: ex_dst.value,
-            value: ex_value.value
-        })
-    });
-
-    const data = await r.json();
-    document.getElementById("explain_result").textContent =
-        JSON.stringify(data, null, 2);
-}
-
-let puzzle_id = null;
-
-async function getPuzzle() {
-    const r = await fetch("http://127.0.0.1:8000/puzzle/");
-    const data = await r.json();
-
-    puzzle_id = data.puzzle_id;
-    document.getElementById("puzzle_question").textContent = data.question;
-}
-
-async function checkPuzzle() {
-    const r = await fetch("http://127.0.0.1:8000/puzzle/check", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            puzzle_id: puzzle_id,
-            answer: puzzle_answer.value
-        })
-    });
-
-    const data = await r.json();
-    document.getElementById("puzzle_result").textContent = data.message;
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
