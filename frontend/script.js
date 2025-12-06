@@ -3,20 +3,33 @@ const API_URL = "http://127.0.0.1:8000";
 // -----------------
 // Convert function
 // -----------------
-async function convertNumber() {
-    const src = document.getElementById("src").value;
-    const dst = document.getElementById("dst").value;
-    const value = document.getElementById("value").value;
-
-    const res = await fetch(`${API_URL}/convert/`, {
+async function convert() {
+    const r = await fetch("http://127.0.0.1:8000/convert/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ src_system: src, dst_system: dst, value })
+        body: JSON.stringify({
+            source: src.value,
+            target: dst.value,
+            value: valueInput.value
+        })
     });
 
-    const data = await res.json();
-    document.getElementById("output").innerText = data.result;
+    const data = await r.json();
+
+    if (data.error) {
+        convert_result.innerHTML = `<span style="color:red">❌ ${data.error}</span>`;
+        return;
+    }
+
+    convert_result.innerHTML = `
+        <div>
+            <strong>Input:</strong> ${data.input} <br>
+            <strong>From (${data.source_system}):</strong> ${data.input} <br>
+            <strong>To (${data.target_system}):</strong> ${data.result}
+        </div>
+    `;
 }
+
 
 // -----------------
 // Explain conversion

@@ -3,20 +3,31 @@
 <head>
     <title>Numeral System Converter</title>
     <style>
-        body { font-family: Arial; padding: 20px; }
-        .box { padding: 15px; border: 1px solid #ccc; margin-bottom: 20px; }
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
         input, select { padding: 8px; width: 200px; margin: 5px; }
-        button { padding: 8px 15px; }
+        button { padding: 8px 15px; cursor: pointer; }
     </style>
 </head>
+
 <body>
 
 <h2>🌍 Cultural Numeral System Converter</h2>
 
+<!-- ========================= CONVERT BOX ========================= -->
 <div class="box">
     <h3>Convert</h3>
-    <input id="value" placeholder="Enter value">
+
+    <input id="valueInput" placeholder="Enter number or numeral">
+
     <br>
+
     <select id="src">
         <option>arabic</option>
         <option>roman</option>
@@ -36,15 +47,22 @@
         <option>yoruba</option>
         <option>inuktitut</option>
     </select>
+
     <br>
+
     <button onclick="convert()">Convert</button>
+
     <p id="convert_result"></p>
 </div>
 
+<!-- ========================= EXPLAIN BOX ========================= -->
 <div class="box">
-    <h3>Explain</h3>
-    <input id="ex_value" placeholder="Value">
+    <h3>Explain Conversion</h3>
+
+    <input id="ex_value" placeholder="Enter value">
+
     <br>
+
     <select id="ex_src">
         <option>arabic</option>
         <option>roman</option>
@@ -64,17 +82,26 @@
         <option>yoruba</option>
         <option>inuktitut</option>
     </select>
+
     <br>
+
     <button onclick="explain()">Explain</button>
+
     <pre id="explain_result"></pre>
 </div>
 
+<!-- ========================= PUZZLE BOX ========================= -->
 <div class="box">
     <h3>Puzzle</h3>
+
     <button onclick="getPuzzle()">New Puzzle</button>
+
     <p id="puzzle_question"></p>
+
     <input id="puzzle_answer" placeholder="Your answer">
+
     <button onclick="checkPuzzle()">Check</button>
+
     <p id="puzzle_result"></p>
 </div>
 
@@ -84,14 +111,15 @@ async function convert() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            src_system: src.value,
-            dst_system: dst.value,
-            value: value.value
+            source: src.value,
+            target: dst.value,
+            value: valueInput.value
         })
     });
 
     const data = await r.json();
-    convert_result.textContent = "Result: " + data.result;
+    document.getElementById("convert_result").textContent =
+        "Result: " + JSON.stringify(data);
 }
 
 async function explain() {
@@ -99,14 +127,15 @@ async function explain() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            src_system: ex_src.value,
-            dst_system: ex_dst.value,
+            source: ex_src.value,
+            target: ex_dst.value,
             value: ex_value.value
         })
     });
 
     const data = await r.json();
-    explain_result.textContent = data.steps.join("\n");
+    document.getElementById("explain_result").textContent =
+        JSON.stringify(data, null, 2);
 }
 
 let puzzle_id = null;
@@ -114,8 +143,9 @@ let puzzle_id = null;
 async function getPuzzle() {
     const r = await fetch("http://127.0.0.1:8000/puzzle/");
     const data = await r.json();
+
     puzzle_id = data.puzzle_id;
-    puzzle_question.textContent = data.question;
+    document.getElementById("puzzle_question").textContent = data.question;
 }
 
 async function checkPuzzle() {
@@ -124,15 +154,14 @@ async function checkPuzzle() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             puzzle_id: puzzle_id,
-            user_answer: puzzle_answer.value
+            answer: puzzle_answer.value
         })
     });
 
     const data = await r.json();
-    puzzle_result.textContent = data.message;
+    document.getElementById("puzzle_result").textContent = data.message;
 }
 </script>
-
 
 </body>
 </html>
